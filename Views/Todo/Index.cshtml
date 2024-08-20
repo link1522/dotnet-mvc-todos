@@ -19,11 +19,12 @@
 </form>
     
 
-    <form>
+    <form asp-controller="Todo" asp-action="UpdateTodoStatusToFinished">
+        <button type="submit">Done</button>
         @foreach (var todo in Model.Todos!)
         {
             <label class="display-6 d-flex align-items-center gap-3" style="cursor: pointer;">
-                <input type="checkbox" />
+                <input type="checkbox" name="id" value="@todo.Id" />
                 @Html.DisplayFor(modelItem => todo.Title)
             </label>
         }

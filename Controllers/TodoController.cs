@@ -23,6 +23,7 @@ public class TodoController : Controller
         }
 
         var todos = from t in _context.Todos
+                    where t.FinishedAt == null
                     select t;
 
         var viewModel = new TodoIndexViewModel
@@ -45,6 +46,19 @@ public class TodoController : Controller
             await _context.SaveChangesAsync();
         }
 
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> UpdateTodoStatusToFinished(List<ulong> id)
+    {
+        var todos = await _context.Todos.Where(todo => id.Contains(todo.Id)).ToListAsync();
+        foreach (var todo in todos)
+        {
+            todo.FinishedAt = DateTime.UtcNow;
+        }
+        await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
 }

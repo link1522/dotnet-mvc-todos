@@ -61,4 +61,18 @@ public class TodoController : Controller
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
+
+    public async Task<IActionResult> Finished()
+    {
+        if (_context.Todos == null)
+        {
+            return Problem("Todo is null");
+        }
+
+        var todos = from t in _context.Todos
+                    where t.FinishedAt != null
+                    select t;
+
+        return View(await todos.ToListAsync());
+    }
 }

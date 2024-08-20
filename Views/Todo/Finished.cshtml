@@ -1,0 +1,18 @@
+@model IEnumerable<Todo>
+
+@{
+    ViewData["Title"] = "Todo Finished Page";
+}
+
+<div>
+    <h1 class="display-4 text-center">TODOS Finished</h1>
+
+    <form asp-controller="Todo" asp-action="UpdateTodoStatusToFinished" class="text-center">
+        @foreach (var todo in Model)
+        {
+            <label class="display-6 text-decoration-line-through d-block">
+                @Html.DisplayFor(m => todo.Title)
+            </label>
+        }
+    </form>
+</div>

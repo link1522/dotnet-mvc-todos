@@ -12,7 +12,7 @@ using dotnet_mvc_todos.DB;
 namespace dotnet_mvc_todos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240819072559_InitialCreate")]
+    [Migration("20240819082223_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

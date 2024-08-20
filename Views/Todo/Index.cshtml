@@ -1,0 +1,35 @@
+@model dotnet_mvc_todos.Models.ViewModel.TodoIndexViewModel
+
+@{
+    ViewData["Title"] = "Todo Page";
+}
+
+<div>
+    <h1 class="display-4 text-center">TODOS</h1>
+
+<form asp-controller="Todo" asp-action="Create">
+    <div class="d-flex gap-2 align-items-start">
+        <span>add todo:</span>
+        <div class="d-flex flex-column">
+            <input type="text" asp-for="NewTitle" />
+            <span asp-validation-for="NewTitle" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+    
+
+    <form>
+        @foreach (var todo in Model.Todos!)
+        {
+            <label class="display-6 d-flex align-items-center gap-3" style="cursor: pointer;">
+                <input type="checkbox" />
+                @Html.DisplayFor(modelItem => todo.Title)
+            </label>
+        }
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
